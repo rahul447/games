@@ -6,13 +6,15 @@ define(function () {
       let curr = start
       let loopRun = true
       while (curr <= end) {
-        setTimeout(() => {
-          loopRun && console.log(curr)
-        }, 600)
+        ((curr, loopRun) => {
+          setTimeout(() => {
+            loopRun && console.log(curr)
+          }, 600)
+        })(curr, loopRun)
         curr++;
       }
       return {
-        "cancel": () => {
+        "cancel": function () {
           loopRun = false
         }
       }

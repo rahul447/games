@@ -17,25 +17,22 @@ define(function () {
     },
 
     permute: function (arr) {
+      let strArr = arr.join("")
       let store = []
-      if (arr.length === 1) {
-        store.push(arr[0]);
+      if (strArr.length === 1) {
+        store.push(strArr);
         return store
       }
 
-      for (let i = 0; i <= arr.length; i++) {
-        let first = arr[i]
-        let rest = arr.reduce((acc, curr) => {
-          curr !== first && acc.push(curr)
-          return acc
-        }, [])
-
+      for (let i = 0; i <= strArr.length; i++) {
+        let first = strArr[i]
+        let rest = strArr.substring(0, i) + strArr.substring(i + 1);
         let innerPermutes = this.permute(rest)
         for (let j = 0; j < innerPermutes.length; j++) {
-          store.push([first, ...innerPermutes[j]])
+          store.push(first + innerPermutes[j])
         }
       }
-
+      console.log("store : ", store);
       return store;
     }
   };
